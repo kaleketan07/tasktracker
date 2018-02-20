@@ -1,0 +1,37 @@
+<h2>Task details:</h2>
+
+<ul>
+  <li>
+    <strong>Assigned to:</strong>
+    <%= @task.user.name %>
+  </li>
+
+  <li>
+    <strong>Task Title:</strong>
+    <%= @task.title %>
+  </li>
+
+  <li>
+    <strong>Task:</strong>
+    <%= @task.body %>
+  </li>
+
+  <li>
+    <strong>Completed?: </strong>
+    <%= if @task.status do %>
+      yes
+    <% else %>
+      no
+    <% end %>
+  </li>
+
+  <li>
+    <strong>Timespent:</strong>
+    <%= @task.timespent %>
+  </li>
+
+</ul>
+
+<p><%= link "Edit", to: task_path(@conn, :edit, @task) %></p>
+<p><%= link "Back", to: "/agenda" %></p>
+<span><%= link "View all tasks", to: task_path(@conn, :index) %></span>

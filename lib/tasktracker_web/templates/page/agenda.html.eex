@@ -1,0 +1,28 @@
+<h1>Create a task:</h1>
+
+<%= if @current_user do %>
+  <%= render "form.html", Map.put(assigns, :action, task_path(@conn, :create)) %>
+<% end %>
+
+<p><%= link "view all tasks", to: task_path(@conn, :index) %> </p>
+
+<h3>Your agenda:</h3>
+<!-- The following code is based on the starter code of Microblog for using cards-->
+<%= Enum.map @tasks, fn t -> %>
+  <%= if t.user == @current_user do %>
+      <div class = "row">
+        <div class = "col">
+          <div class = "card">
+            <div class = "card-body">
+              <h4 class = "card-title">
+                <%= t.title%>
+              </h4>
+              <span><%= link "Show task", to: task_path(@conn, :show, t), class: "btn btn-default btn-xs" %></span>
+              <span><%= link "Edit task", to: task_path(@conn, :edit, t), class: "btn btn-default btn-xs" %></span>
+              <span><%= link "Delete task", to: task_path(@conn, :delete, t), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+  <% end %>
+<% end %>
